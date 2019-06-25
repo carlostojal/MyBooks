@@ -65,7 +65,6 @@ public class AddBook extends Fragment {
     }
 
     public void onAddBook(Context context) {
-        Toast.makeText(getActivity(),"onAddBook()",Toast.LENGTH_SHORT).show();
         String title = titleField.getText().toString(); //obligatory
         String writer = writerField.getText().toString() ; //obligatory
         String publisher = publisherField.getText().toString();
@@ -77,13 +76,15 @@ public class AddBook extends Fragment {
                 Toast.makeText(getActivity(),"Please wait...",Toast.LENGTH_SHORT).show();
                 OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("books.csv",Context.MODE_APPEND));
                 outputStreamWriter.write(title);
-                outputStreamWriter.write(";");
+                outputStreamWriter.write("; ");
                 outputStreamWriter.write(writer);
-                outputStreamWriter.write(";");
+                outputStreamWriter.write("; ");
                 outputStreamWriter.write(publisher);
-                outputStreamWriter.write(";");
+                outputStreamWriter.write("; ");
                 outputStreamWriter.write(String.valueOf(year));
-                outputStreamWriter.write(";");
+                outputStreamWriter.write("; ");
+                outputStreamWriter.write(String.valueOf(0));
+                outputStreamWriter.write("; ");
                 outputStreamWriter.write(String.valueOf(npages));
                 outputStreamWriter.write("\n");
                 outputStreamWriter.close();
