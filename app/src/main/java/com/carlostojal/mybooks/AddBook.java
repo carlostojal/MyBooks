@@ -89,6 +89,12 @@ public class AddBook extends Fragment {
                 outputStreamWriter.write("\n");
                 outputStreamWriter.close();
                 Toast.makeText(getActivity(),"Book added successfully.",Toast.LENGTH_SHORT).show();
+                //cleans all input fields
+                titleField.setText("");
+                writerField.setText("");
+                publisherField.setText("");
+                yearField.setText("");
+                npagesField.setText("");
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
                 Toast.makeText(getActivity(),"Error.",Toast.LENGTH_SHORT).show();

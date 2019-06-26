@@ -62,6 +62,7 @@ public class Books extends Fragment {
                     //Toast.makeText(getContext(),splitStr[0]+"\n"+splitStr[1],Toast.LENGTH_SHORT).show();
                 }
             }
+            br.close();
             Toast.makeText(getContext(),"Loaded books.",Toast.LENGTH_SHORT).show();
         } catch (FileNotFoundException e) {
             e.printStackTrace();

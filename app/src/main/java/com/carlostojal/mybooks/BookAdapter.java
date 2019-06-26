@@ -27,6 +27,7 @@ public class BookAdapter extends ArrayAdapter<Book> {
         this.books = books;
     }
 
+    //Generates each element
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
