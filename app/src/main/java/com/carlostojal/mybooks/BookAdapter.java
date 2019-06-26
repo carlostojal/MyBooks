@@ -40,8 +40,8 @@ public class BookAdapter extends ArrayAdapter<Book> {
         //calculates and sets progress details on preview
         int cpage = books.get(position).getCpage();
         int npages = books.get(position).getNpages();
-        int percentage = (cpage/npages)*100;
-        String progressText = percentage+"% ("+cpage+"/"+npages+")";
+        float percentage = ((float) cpage/npages)*100;
+        String progressText = (int)percentage+"% ("+cpage+"/"+npages+")";
 
         title.setText(books.get(position).getTitle());
         writer.setText(books.get(position).getWriter());

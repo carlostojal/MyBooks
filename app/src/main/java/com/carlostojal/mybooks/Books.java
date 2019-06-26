@@ -31,14 +31,39 @@ public class Books extends Fragment {
     public static final String TAG = "BooksFragment";
 
     private ListView bookList;
+    private ArrayList<Book> books;
+    private boolean isStarted = false;
+    private boolean isVisible = false;
+
+    @Override
+    public void onStart() {
+       super.onStart();
+       isStarted = true;
+       if(isVisible&&isStarted) {
+           books = loadBooks();
+           ArrayAdapter bookAdapter = new BookAdapter(getContext(),books);
+           bookList.setAdapter(bookAdapter);
+       }
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        isVisible = isVisibleToUser;
+        if(isStarted&&isVisible) {
+            books = loadBooks();
+            ArrayAdapter bookAdapter = new BookAdapter(getContext(),books);
+            bookList.setAdapter(bookAdapter);
+        }
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_books,container,false);
 
+        books = loadBooks();
         bookList = view.findViewById(R.id.booklist);
-        final ArrayList<Book> books = loadBooks();
         ArrayAdapter bookAdapter = new BookAdapter(getContext(),books);
         bookList.setAdapter(bookAdapter);
 
@@ -63,9 +88,10 @@ public class Books extends Fragment {
         return view;
     }
 
-    private ArrayList<Book> loadBooks() {
+    public ArrayList<Book> loadBooks() {
         ArrayList<Book> books = new ArrayList<Book>();
         File file = new File(getContext().getFilesDir(),"books.csv");
+
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
             String line;
