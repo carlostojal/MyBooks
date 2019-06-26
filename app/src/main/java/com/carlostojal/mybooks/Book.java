@@ -15,14 +15,16 @@ public class Book {
     private int year;
     private int cpage; //current page
     private int npages; //number of pages
+    private String was_happening;
 
-    public Book(String title,String writer,String publisher,int year, int cpage, int npages) {
+    public Book(String title,String writer,String publisher,int year,int cpage,int npages,String was_happening) {
         this.title = title;
         this.writer = writer;
         this.publisher = publisher;
         this.year = year;
         this.cpage = cpage;
         this.npages = npages;
+        this.was_happening = was_happening;
     }
 
     public String getTitle() {
@@ -49,6 +51,10 @@ public class Book {
         return  npages;
     }
 
+    public String getWas_happening() {
+        return was_happening;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -71,5 +77,9 @@ public class Book {
 
     public void setNpages(int npages) {
         this.npages = npages;
+    }
+
+    public void setWas_happening(String was_happening) {
+        this.was_happening = was_happening;
     }
 }

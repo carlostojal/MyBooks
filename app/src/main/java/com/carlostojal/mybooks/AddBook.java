@@ -67,17 +67,19 @@ public class AddBook extends Fragment {
             try {
                 Toast.makeText(getActivity(),"Please wait...",Toast.LENGTH_SHORT).show();
                 OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("books.csv",Context.MODE_APPEND));
-                outputStreamWriter.write(title);
+                outputStreamWriter.write(title); //title
                 outputStreamWriter.write("; ");
-                outputStreamWriter.write(writer);
+                outputStreamWriter.write(writer); //writer
                 outputStreamWriter.write("; ");
-                outputStreamWriter.write(publisher);
+                outputStreamWriter.write(publisher); //publisher
                 outputStreamWriter.write("; ");
-                outputStreamWriter.write(String.valueOf(year));
+                outputStreamWriter.write(String.valueOf(year)); //year
                 outputStreamWriter.write("; ");
-                outputStreamWriter.write(String.valueOf(0));
+                outputStreamWriter.write(String.valueOf(0)); //current page
                 outputStreamWriter.write("; ");
-                outputStreamWriter.write(String.valueOf(npages));
+                outputStreamWriter.write(String.valueOf(npages)); //number of pages
+                outputStreamWriter.write("; ");
+                outputStreamWriter.write("No information provided."); //what was happening
                 outputStreamWriter.write("\n");
                 outputStreamWriter.close();
                 Toast.makeText(getActivity(),"Book added successfully.",Toast.LENGTH_SHORT).show();

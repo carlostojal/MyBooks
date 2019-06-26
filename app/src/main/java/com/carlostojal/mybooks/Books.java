@@ -7,10 +7,12 @@ package com.carlostojal.mybooks;
 // github.com/carlostojal/MyBooks
 //
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -36,9 +38,27 @@ public class Books extends Fragment {
         View view = inflater.inflate(R.layout.fragment_books,container,false);
 
         bookList = view.findViewById(R.id.booklist);
-        ArrayList<Book> books = loadBooks();
+        final ArrayList<Book> books = loadBooks();
         ArrayAdapter bookAdapter = new BookAdapter(getContext(),books);
         bookList.setAdapter(bookAdapter);
+
+        //gets element click
+        bookList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Book selectedBook = (Book) adapterView.getItemAtPosition(i);
+                //open the book activity
+                Intent intent = new Intent(Books.this.getActivity(),BookDetails.class);
+                intent.putExtra("Title",selectedBook.getTitle());
+                intent.putExtra("Writer",selectedBook.getWriter());
+                intent.putExtra("Publisher",selectedBook.getPublisher());
+                intent.putExtra("Year",selectedBook.getYear());
+                intent.putExtra("Cpage",selectedBook.getCpage());
+                intent.putExtra("Npages",selectedBook.getNpages());
+                intent.putExtra("Was_happening",selectedBook.getWas_happening());
+                startActivity(intent);
+            }
+        });
 
         return view;
     }
@@ -54,9 +74,9 @@ public class Books extends Fragment {
             Book book;
             while((line = br.readLine()) != null) {
                 String[] splitStr=line.split("; ");
-                if(splitStr.length==6) {
+                if(splitStr.length==7) {
                     String title = splitStr[0];
-                    book = new Book(splitStr[0],splitStr[1],splitStr[2],Integer.parseInt(splitStr[3]),Integer.parseInt(splitStr[4]),Integer.parseInt(splitStr[5]));
+                    book = new Book(splitStr[0],splitStr[1],splitStr[2],Integer.parseInt(splitStr[3]),Integer.parseInt(splitStr[4]),Integer.parseInt(splitStr[5]),splitStr[6]);
                     books.add(book);
                     //Toast.makeText(getContext(),splitStr[0]+"\n"+splitStr[1],Toast.LENGTH_SHORT).show();
                 }
