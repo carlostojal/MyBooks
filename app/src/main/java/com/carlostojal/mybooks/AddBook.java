@@ -71,7 +71,7 @@ public class AddBook extends Fragment {
         int year = Integer.parseInt(yearField.getText().toString());
         int npages = Integer.parseInt(npagesField.getText().toString()); //obligatory
 
-        if(!title.equals("")&&!writer.equals("")&&npages>0) {
+        if(!title.equals("")&&!writer.equals("")&&npages>=0) {
             try {
                 Toast.makeText(getActivity(),"Please wait...",Toast.LENGTH_SHORT).show();
                 OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("books.csv",Context.MODE_APPEND));
