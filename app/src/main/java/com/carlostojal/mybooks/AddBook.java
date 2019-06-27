@@ -60,10 +60,19 @@ public class AddBook extends Fragment {
         String title = titleField.getText().toString(); //obligatory
         String writer = writerField.getText().toString() ; //obligatory
         String publisher = publisherField.getText().toString();
-        int year = Integer.parseInt(yearField.getText().toString());
-        int npages = Integer.parseInt(npagesField.getText().toString()); //obligatory
+        int year;
+        int npages;
+        if(yearField.getText().toString().equals(""))
+            year = 0;
+        else
+            year = Integer.parseInt(yearField.getText().toString());
 
-        if(!title.equals("")&&!writer.equals("")&&npages>=0) {
+        if(npagesField.getText().toString().equals(""))
+            npages = 0;
+        else
+            npages = Integer.parseInt(npagesField.getText().toString()); //obligatory
+
+        if(!title.equals("")&&!writer.equals("")&&npages>0) {
             try {
                 Toast.makeText(getActivity(),"Please wait...",Toast.LENGTH_SHORT).show();
                 OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("books.csv",Context.MODE_APPEND));
@@ -98,6 +107,6 @@ public class AddBook extends Fragment {
             }
         }
         else
-            Toast.makeText(getActivity(),"Obligatory fields can't be left empty.",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(),"Obligatory fields can't be left empty and number of pages cant't be negative.",Toast.LENGTH_SHORT).show();
     }
 }
