@@ -80,63 +80,69 @@ public class BookDetails extends AppCompatActivity {
         newBook.setWas_happening(happened.getText().toString());
 
         ArrayList<Book> books = loadBooks();
-        Toast.makeText(getApplicationContext(),String.valueOf(books.size()),Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(),String.valueOf(books.size()),Toast.LENGTH_SHORT).show();
 
-        //cleans previous file content
-        File file = new File(getApplicationContext().getFilesDir(),"books.csv");
-        try {
-            PrintWriter printWriter = new PrintWriter(file);
-            printWriter.print("");
-            printWriter.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        //if the page introduced as current is not a bigger value than total number of pages
+        if(newBook.getCpage()<=old.getNpages()) {
 
-        try {
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(getApplicationContext().openFileOutput("books.csv", Context.MODE_APPEND));
-            //puts edited book on the top of the list
-            outputStreamWriter.write(newBook.getTitle());
-            outputStreamWriter.write("; ");
-            outputStreamWriter.write(newBook.getWriter());
-            outputStreamWriter.write("; ");
-            outputStreamWriter.write(newBook.getPublisher());
-            outputStreamWriter.write("; ");
-            outputStreamWriter.write(String.valueOf(newBook.getYear()));
-            outputStreamWriter.write("; ");
-            outputStreamWriter.write(String.valueOf(newBook.getCpage()));
-            outputStreamWriter.write("; ");
-            outputStreamWriter.write(String.valueOf(newBook.getNpages()));
-            outputStreamWriter.write("; ");
-            outputStreamWriter.write(newBook.getWas_happening());
-            outputStreamWriter.write("\n");
-            //writes each book in the list, if it isn't the edited
-            for(int i=0;i<books.size();i++) {
-                if(!books.get(i).getTitle().equals(old.getTitle())||!books.get(i).getWriter().equals(old.getWriter())) {
-                    outputStreamWriter.write(books.get(i).getTitle());
-                    outputStreamWriter.write("; ");
-                    outputStreamWriter.write(books.get(i).getWriter());
-                    outputStreamWriter.write("; ");
-                    outputStreamWriter.write(books.get(i).getPublisher());
-                    outputStreamWriter.write("; ");
-                    outputStreamWriter.write(String.valueOf(books.get(i).getYear()));
-                    outputStreamWriter.write("; ");
-                    outputStreamWriter.write(String.valueOf(books.get(i).getCpage()));
-                    outputStreamWriter.write("; ");
-                    outputStreamWriter.write(String.valueOf(books.get(i).getNpages()));
-                    outputStreamWriter.write("; ");
-                    outputStreamWriter.write(books.get(i).getWas_happening());
-                    outputStreamWriter.write("\n");
-                }
+            //cleans previous file content
+            File file = new File(getApplicationContext().getFilesDir(), "books.csv");
+            try {
+                PrintWriter printWriter = new PrintWriter(file);
+                printWriter.print("");
+                printWriter.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
             }
-            outputStreamWriter.close();
-            Toast.makeText(getApplicationContext(),"Changes saved successfully.",Toast.LENGTH_SHORT).show();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            Toast.makeText(getApplicationContext(),"Error.",Toast.LENGTH_SHORT).show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            Toast.makeText(getApplicationContext(),"Error.",Toast.LENGTH_SHORT).show();
+
+            try {
+                OutputStreamWriter outputStreamWriter = new OutputStreamWriter(getApplicationContext().openFileOutput("books.csv", Context.MODE_APPEND));
+                //puts edited book on the top of the list
+                outputStreamWriter.write(newBook.getTitle());
+                outputStreamWriter.write("; ");
+                outputStreamWriter.write(newBook.getWriter());
+                outputStreamWriter.write("; ");
+                outputStreamWriter.write(newBook.getPublisher());
+                outputStreamWriter.write("; ");
+                outputStreamWriter.write(String.valueOf(newBook.getYear()));
+                outputStreamWriter.write("; ");
+                outputStreamWriter.write(String.valueOf(newBook.getCpage()));
+                outputStreamWriter.write("; ");
+                outputStreamWriter.write(String.valueOf(newBook.getNpages()));
+                outputStreamWriter.write("; ");
+                outputStreamWriter.write(newBook.getWas_happening());
+                outputStreamWriter.write("\n");
+                //writes each book in the list, if it isn't the edited
+                for (int i = 0; i < books.size(); i++) {
+                    if (!books.get(i).getTitle().equals(old.getTitle()) || !books.get(i).getWriter().equals(old.getWriter())) {
+                        outputStreamWriter.write(books.get(i).getTitle());
+                        outputStreamWriter.write("; ");
+                        outputStreamWriter.write(books.get(i).getWriter());
+                        outputStreamWriter.write("; ");
+                        outputStreamWriter.write(books.get(i).getPublisher());
+                        outputStreamWriter.write("; ");
+                        outputStreamWriter.write(String.valueOf(books.get(i).getYear()));
+                        outputStreamWriter.write("; ");
+                        outputStreamWriter.write(String.valueOf(books.get(i).getCpage()));
+                        outputStreamWriter.write("; ");
+                        outputStreamWriter.write(String.valueOf(books.get(i).getNpages()));
+                        outputStreamWriter.write("; ");
+                        outputStreamWriter.write(books.get(i).getWas_happening());
+                        outputStreamWriter.write("\n");
+                    }
+                }
+                outputStreamWriter.close();
+                Toast.makeText(getApplicationContext(), "Changes saved successfully.", Toast.LENGTH_SHORT).show();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                Toast.makeText(getApplicationContext(), "Error.", Toast.LENGTH_SHORT).show();
+            } catch (IOException e) {
+                e.printStackTrace();
+                Toast.makeText(getApplicationContext(), "Error.", Toast.LENGTH_SHORT).show();
+            }
         }
+        else
+            Toast.makeText(getApplicationContext(), "Current page can't be a bigger value than the total number of pages.", Toast.LENGTH_SHORT).show();
     }
 
     private ArrayList<Book> loadBooks() {
