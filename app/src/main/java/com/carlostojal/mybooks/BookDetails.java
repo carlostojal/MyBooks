@@ -132,6 +132,7 @@ public class BookDetails extends AppCompatActivity {
                     }
                 }
                 outputStreamWriter.close();
+                was_happening.setText(newBook.getWas_happening());
                 Toast.makeText(getApplicationContext(), "Changes saved successfully.", Toast.LENGTH_SHORT).show();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
