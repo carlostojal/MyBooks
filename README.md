@@ -5,7 +5,11 @@
 Android app oriented for those who like to read books.
 MyBooks lets you always keep track of where you were in the books you are reading and what was happening in that part.
 
-![Books Tab](https://raw.githubusercontent.com/carlostojal/MyBooks/master/screenshots/Screenshot_2019-06-26-20-17-02-353_com.carlostojal.mybooks.png?token=AIWB3W2SHKSUKBEY4JN2BL25CPIOW)
-![Book Details](https://raw.githubusercontent.com/carlostojal/MyBooks/master/screenshots/Screenshot_2019-06-26-20-17-27-825_com.carlostojal.mybooks.png?token=AIWB3WZNDETUJPJX4RKBKVC5CPITC)
-![Add Book Tab](https://raw.githubusercontent.com/carlostojal/MyBooks/master/screenshots/Screenshot_2019-06-26-20-16-28-800_com.carlostojal.mybooks.png?token=AIWB3W7IXUX42HGJNCANSIS5CPIRO)
-![About Tab](https://raw.githubusercontent.com/carlostojal/MyBooks/master/screenshots/Screenshot_2019-06-26-21-04-23-146_com.carlostojal.mybooks.png?token=AIWB3W5XEDABIISYT7XU62K5CPIU4)
+![Books Tab (vertical)](https://raw.githubusercontent.com/carlostojal/MyBooks/master/screenshots/Screenshot_2019-06-28-13-44-27-300_com.carlostojal.mybooks.png)
+![Books Tab (horizontal)](https://raw.githubusercontent.com/carlostojal/MyBooks/master/screenshots/Screenshot_2019-06-28-13-45-45-919_com.carlostojal.mybooks.png)
+![Book Details (vertical)](https://raw.githubusercontent.com/carlostojal/MyBooks/master/screenshots/Screenshot_2019-06-28-13-45-29-482_com.carlostojal.mybooks.png)
+![Book Details (horizontal)](https://raw.githubusercontent.com/carlostojal/MyBooks/master/screenshots/Screenshot_2019-06-28-13-45-51-606_com.carlostojal.mybooks.png)
+![Add Book Tab (vertical)](https://raw.githubusercontent.com/carlostojal/MyBooks/master/screenshots/Screenshot_2019-06-28-13-44-17-534_com.carlostojal.mybooks.png)
+![Add Book Tab (horizontal)](https://raw.githubusercontent.com/carlostojal/MyBooks/master/screenshots/Screenshot_2019-06-28-13-45-58-469_com.carlostojal.mybooks.png)
+![About Tab (vertical)](https://raw.githubusercontent.com/carlostojal/MyBooks/master/screenshots/Screenshot_2019-06-28-13-45-37-725_com.carlostojal.mybooks.png)
+![About Tab (horizontal)](https://raw.githubusercontent.com/carlostojal/MyBooks/master/screenshots/Screenshot_2019-06-28-13-46-02-350_com.carlostojal.mybooks.png)
