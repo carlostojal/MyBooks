@@ -134,6 +134,7 @@ public class BookDetails extends AppCompatActivity {
                 outputStreamWriter.close();
                 was_happening.setText(newBook.getWas_happening());
                 Toast.makeText(getApplicationContext(), "Changes saved successfully.", Toast.LENGTH_SHORT).show();
+                finish();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
                 Toast.makeText(getApplicationContext(), "Error.", Toast.LENGTH_SHORT).show();
