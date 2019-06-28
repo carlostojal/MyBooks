@@ -99,12 +99,11 @@ public class Books extends Fragment {
             //Toast.makeText(getContext(),"Loading books. Please wait...",Toast.LENGTH_SHORT).show();
             Book book;
             while((line = br.readLine()) != null) {
+
                 String[] splitStr=line.split("; ");
                 if(splitStr.length==7) {
-                    String title = splitStr[0];
                     book = new Book(splitStr[0],splitStr[1],splitStr[2],Integer.parseInt(splitStr[3]),Integer.parseInt(splitStr[4]),Integer.parseInt(splitStr[5]),splitStr[6]);
                     books.add(book);
-                    //Toast.makeText(getContext(),splitStr[0]+"\n"+splitStr[1],Toast.LENGTH_SHORT).show();
                 }
             }
             br.close();

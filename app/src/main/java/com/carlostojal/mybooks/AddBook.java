@@ -88,7 +88,7 @@ public class AddBook extends Fragment {
                 outputStreamWriter.write("; ");
                 outputStreamWriter.write(String.valueOf(npages)); //number of pages
                 outputStreamWriter.write("; ");
-                outputStreamWriter.write(""); //what was happening
+                outputStreamWriter.write("No information provided."); //what was happening
                 outputStreamWriter.write("\n");
                 outputStreamWriter.close();
                 Toast.makeText(getActivity(),"Book added successfully.",Toast.LENGTH_SHORT).show();
