@@ -1,7 +1,7 @@
 package com.carlostojal.mybooks;
 
 //
-// Copyright (c) Carlos Tojal (carlostojal)
+// Copyright © Carlos Tojal (carlostojal)
 // BookDetails.java
 // MyBooks
 // github.com/carlostojal/MyBooks
@@ -47,7 +47,7 @@ public class BookDetails extends AppCompatActivity {
 
         //gets intent extras to a Book object
         Bundle extras = getIntent().getExtras();
-        old = new Book(extras.getString("Title"),extras.getString("Writer"),extras.getString("Publisher"),extras.getInt("Year"),extras.getInt("Cpage"),extras.getInt("Npages"),extras.getString("Was_happening"));
+        old = new Book(extras.getString("Title"),extras.getString("Writer"),extras.getString("Publisher"),extras.getInt("Year"),extras.getInt("Cpage"),extras.getInt("Npages"),extras.getInt("Nsaves"),extras.getStringArray("Was_happening"));
         newBook = old;
 
         //sets activity title to the title of the book
@@ -69,15 +69,27 @@ public class BookDetails extends AppCompatActivity {
         publisher.setText(old.getPublisher());
         year.setText(String.valueOf(old.getYear()));
         npages.setText(String.valueOf(old.getNpages()));
-        was_happening.setText(old.getWas_happening());
+        StringBuilder wasHappening = new StringBuilder();
+        for(int i=0;i<old.getNsaves();i++) {
+            wasHappening.append("• ");
+            wasHappening.append(old.getWas_happening()[i]);
+            wasHappening.append("\n");
+        }
+        was_happening.setText(wasHappening);
         cpage.setText(String.valueOf(old.getCpage()));
-        happened.setText(old.getWas_happening());
     }
 
     public void onSave(View view) {
-
+        Toast.makeText(getApplicationContext(),"Test",Toast.LENGTH_SHORT).show();
         newBook.setCpage(Integer.parseInt(cpage.getText().toString()));
-        newBook.setWas_happening(happened.getText().toString());
+        newBook.setNsaves(old.getNsaves()+1);
+        String[] wasHappening = new String[newBook.getNsaves()];
+        for(int i=0;i<newBook.getNsaves()-1;i++) {
+            wasHappening[i] = old.getWas_happening()[i];
+        }
+        //Toast.makeText(getApplicationContext(),String.valueOf(newBook.getNsaves()-1),Toast.LENGTH_SHORT).show();
+        wasHappening[newBook.getNsaves()-1] = happened.getText().toString()+" (page "+newBook.getCpage()+")";
+        newBook.setWas_happening(wasHappening);
 
         ArrayList<Book> books = loadBooks();
         //Toast.makeText(getApplicationContext(),String.valueOf(books.size()),Toast.LENGTH_SHORT).show();
@@ -110,7 +122,11 @@ public class BookDetails extends AppCompatActivity {
                 outputStreamWriter.write("; ");
                 outputStreamWriter.write(String.valueOf(newBook.getNpages()));
                 outputStreamWriter.write("; ");
-                outputStreamWriter.write(newBook.getWas_happening());
+                outputStreamWriter.write(String.valueOf(newBook.getNsaves()));
+                for(int i = 0; i < newBook.getNsaves(); i++) {
+                    outputStreamWriter.write("; ");
+                    outputStreamWriter.write(newBook.getWas_happening()[i]);
+                }
                 outputStreamWriter.write("\n");
                 //writes each book in the list, if it isn't the edited
                 for (int i = 0; i < books.size(); i++) {
@@ -127,13 +143,16 @@ public class BookDetails extends AppCompatActivity {
                         outputStreamWriter.write("; ");
                         outputStreamWriter.write(String.valueOf(books.get(i).getNpages()));
                         outputStreamWriter.write("; ");
-                        outputStreamWriter.write(books.get(i).getWas_happening());
+                        outputStreamWriter.write(String.valueOf(newBook.getNsaves()));
+                        for(int j = 0; j < books.get(i).getNsaves(); j++) {
+                            outputStreamWriter.write("; ");
+                            outputStreamWriter.write(books.get(i).getWas_happening()[j]);
+                        }
                         outputStreamWriter.write("\n");
                     }
                 }
                 outputStreamWriter.close();
-                was_happening.setText(newBook.getWas_happening());
-                Toast.makeText(getApplicationContext(), "Changes saved successfully.", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "Changes saved successfully.", Toast.LENGTH_SHORT).show();
                 finish();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -157,12 +176,18 @@ public class BookDetails extends AppCompatActivity {
             Book book;
             while((line = br.readLine()) != null) {
                 String[] splitStr=line.split("; ");
-                if(splitStr.length==7) {
-                    String title = splitStr[0];
-                    book = new Book(splitStr[0],splitStr[1],splitStr[2],Integer.parseInt(splitStr[3]),Integer.parseInt(splitStr[4]),Integer.parseInt(splitStr[5]),splitStr[6]);
+                int nsaves = Integer.parseInt(splitStr[6]);
+                //Toast.makeText(getContext(),splitStr[6],Toast.LENGTH_SHORT).show();
+                String[] wasHappening = new String[nsaves];
+                for(int i=0;i<nsaves;i++) {
+                    wasHappening[i] = splitStr[i+7];
+                }
+                if(splitStr.length==7+nsaves) {
+                    book = new Book(splitStr[0],splitStr[1],splitStr[2],Integer.parseInt(splitStr[3]),Integer.parseInt(splitStr[4]),Integer.parseInt(splitStr[5]),nsaves,wasHappening);
                     books.add(book);
                 }
             }
+            //Toast.makeText(getApplicationContext(),String.valueOf(nlines),Toast.LENGTH_SHORT).show();
             br.close();
             //Toast.makeText(getApplicationContext(),stringBuilder,Toast.LENGTH_SHORT).show();
         } catch (FileNotFoundException e) {

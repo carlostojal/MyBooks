@@ -1,7 +1,7 @@
 package com.carlostojal.mybooks;
 
 //
-// Copyright (c) Carlos Tojal (carlostojal)
+// Copyright © Carlos Tojal (carlostojal)
 // Books.java
 // MyBooks
 // github.com/carlostojal/MyBooks
@@ -62,6 +62,8 @@ public class Books extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_books,container,false);
 
+        //Toast.makeText(getContext(),"Test",Toast.LENGTH_SHORT).show();
+
         books = loadBooks();
         bookList = view.findViewById(R.id.booklist);
         ArrayAdapter bookAdapter = new BookAdapter(getContext(),books);
@@ -80,6 +82,7 @@ public class Books extends Fragment {
                 intent.putExtra("Year",selectedBook.getYear());
                 intent.putExtra("Cpage",selectedBook.getCpage());
                 intent.putExtra("Npages",selectedBook.getNpages());
+                intent.putExtra("Nsaves",selectedBook.getNsaves());
                 intent.putExtra("Was_happening",selectedBook.getWas_happening());
                 startActivity(intent);
             }
@@ -99,10 +102,15 @@ public class Books extends Fragment {
             //Toast.makeText(getContext(),"Loading books. Please wait...",Toast.LENGTH_SHORT).show();
             Book book;
             while((line = br.readLine()) != null) {
-
                 String[] splitStr=line.split("; ");
-                if(splitStr.length==7) {
-                    book = new Book(splitStr[0],splitStr[1],splitStr[2],Integer.parseInt(splitStr[3]),Integer.parseInt(splitStr[4]),Integer.parseInt(splitStr[5]),splitStr[6]);
+                int nsaves = Integer.parseInt(splitStr[6]);
+                //Toast.makeText(getContext(),splitStr[6],Toast.LENGTH_SHORT).show();
+                String[] wasHappening = new String[nsaves];
+                for(int i=0;i<nsaves;i++) {
+                    wasHappening[i] = splitStr[i+7];
+                }
+                if(splitStr.length==7+nsaves) {
+                    book = new Book(splitStr[0],splitStr[1],splitStr[2],Integer.parseInt(splitStr[3]),Integer.parseInt(splitStr[4]),Integer.parseInt(splitStr[5]),nsaves,wasHappening);
                     books.add(book);
                 }
             }

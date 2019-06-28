@@ -1,7 +1,7 @@
 package com.carlostojal.mybooks;
 
 //
-// Copyright (c) Carlos Tojal (carlostojal)
+// Copyright © Carlos Tojal (carlostojal)
 // AddBook.java
 // MyBooks
 // github.com/carlostojal/MyBooks
@@ -88,7 +88,9 @@ public class AddBook extends Fragment {
                 outputStreamWriter.write("; ");
                 outputStreamWriter.write(String.valueOf(npages)); //number of pages
                 outputStreamWriter.write("; ");
-                outputStreamWriter.write("No information provided."); //what was happening
+                outputStreamWriter.write(String.valueOf(1));
+                outputStreamWriter.write("; ");
+                outputStreamWriter.write("Book add."); //what was happening
                 outputStreamWriter.write("\n");
                 outputStreamWriter.close();
                 Toast.makeText(getActivity(),"Book added successfully.",Toast.LENGTH_SHORT).show();

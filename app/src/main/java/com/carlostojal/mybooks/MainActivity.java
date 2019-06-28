@@ -1,7 +1,7 @@
 package com.carlostojal.mybooks;
 
 //
-// Copyright (c) Carlos Tojal (carlostojal)
+// Copyright © Carlos Tojal (carlostojal)
 // MainActivity.java
 // MyBooks
 // github.com/carlostojal/MyBooks

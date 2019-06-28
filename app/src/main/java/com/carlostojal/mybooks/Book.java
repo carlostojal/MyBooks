@@ -1,7 +1,7 @@
 package com.carlostojal.mybooks;
 
 //
-// Copyright (c) Carlos Tojal (carlostojal)
+// Copyright © Carlos Tojal (carlostojal)
 // Book.java
 // MyBooks
 // github.com/carlostojal/MyBooks
@@ -15,15 +15,17 @@ public class Book {
     private int year;
     private int cpage; //current page
     private int npages; //number of pages
-    private String was_happening;
+    private int nsaves;
+    private String[] was_happening;
 
-    public Book(String title,String writer,String publisher,int year,int cpage,int npages,String was_happening) {
+    public Book(String title,String writer,String publisher,int year,int cpage,int npages,int nsaves,String[] was_happening) {
         this.title = title;
         this.writer = writer;
         this.publisher = publisher;
         this.year = year;
         this.cpage = cpage;
         this.npages = npages;
+        this.nsaves = nsaves;
         this.was_happening = was_happening;
     }
 
@@ -51,7 +53,11 @@ public class Book {
         return  npages;
     }
 
-    public String getWas_happening() {
+    public int getNsaves() {
+        return nsaves;
+    }
+
+    public String[] getWas_happening() {
         return was_happening;
     }
 
@@ -79,7 +85,11 @@ public class Book {
         this.npages = npages;
     }
 
-    public void setWas_happening(String was_happening) {
+    public void setNsaves(int nsaves) {
+        this.nsaves = nsaves;
+    }
+
+    public void setWas_happening(String[] was_happening) {
         this.was_happening = was_happening;
     }
 }

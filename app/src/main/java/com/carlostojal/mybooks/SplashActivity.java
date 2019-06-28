@@ -1,5 +1,12 @@
 package com.carlostojal.mybooks;
 
+//
+// Copyright © Carlos Tojal (carlostojal)
+// SplashActivity.java
+// MyBooks
+// github.com/carlostojal/MyBooks
+//
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
