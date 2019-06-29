@@ -5,9 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -105,6 +103,17 @@
             app:layout_constraintTop_toBottomOf="@+id/year" />
 
         <TextView
+            android:id="@+id/genre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/genre"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/year_field" />
+
+        <TextView
             android:id="@+id/npages"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -113,13 +122,14 @@
             android:text="@string/npages"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/year_field" />
+            app:layout_constraintTop_toBottomOf="@+id/genre_field" />
 
         <EditText
             android:id="@+id/npages_field"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
             android:ems="10"
             android:inputType="number"
             app:layout_constraintStart_toStartOf="parent"
@@ -130,15 +140,26 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="16dp"
             android:background="@color/colorPrimary"
             android:onClick="onAddBook"
             android:text="@string/add_book"
             android:textColor="@color/colorAccent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/npages_field" />
+
+        <EditText
+            android:id="@+id/genre_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/genre" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

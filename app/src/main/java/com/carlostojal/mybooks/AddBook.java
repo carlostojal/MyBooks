@@ -31,6 +31,7 @@ public class AddBook extends Fragment {
     private EditText writerField;
     private EditText publisherField;
     private EditText yearField;
+    private EditText genreField;
     private EditText npagesField;
     private Button addbook_button;
 
@@ -43,6 +44,7 @@ public class AddBook extends Fragment {
         writerField = (EditText) view.findViewById(R.id.writer_field);
         publisherField = (EditText) view.findViewById(R.id.publisher_field);
         yearField = (EditText) view.findViewById(R.id.year_field);
+        genreField = (EditText) view.findViewById(R.id.genre_field);
         npagesField = (EditText) view.findViewById(R.id.npages_field);
         addbook_button = (Button) view.findViewById(R.id.addbook_button);
 
@@ -60,12 +62,17 @@ public class AddBook extends Fragment {
         String title = titleField.getText().toString(); //obligatory
         String writer = writerField.getText().toString() ; //obligatory
         String publisher = publisherField.getText().toString();
+        String genre = genreField.getText().toString();
         int year;
         int npages;
         if(yearField.getText().toString().equals(""))
             year = 0;
         else
             year = Integer.parseInt(yearField.getText().toString());
+
+        if(genre.equals("")) {
+            genre = "No information provided.";
+        }
 
         if(npagesField.getText().toString().equals(""))
             npages = 0;
@@ -89,11 +96,13 @@ public class AddBook extends Fragment {
                 outputStreamWriter.write("; ");
                 outputStreamWriter.write(String.valueOf(year)); //year
                 outputStreamWriter.write("; ");
+                outputStreamWriter.write(genre); //genre
+                outputStreamWriter.write("; ");
                 outputStreamWriter.write(String.valueOf(0)); //current page
                 outputStreamWriter.write("; ");
                 outputStreamWriter.write(String.valueOf(npages)); //number of pages
                 outputStreamWriter.write("; ");
-                outputStreamWriter.write(String.valueOf(1));
+                outputStreamWriter.write(String.valueOf(1)); //number of saves
                 outputStreamWriter.write("; ");
                 outputStreamWriter.write("Book add."); //what was happening
                 outputStreamWriter.write("\n");

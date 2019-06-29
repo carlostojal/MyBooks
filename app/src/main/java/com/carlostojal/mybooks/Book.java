@@ -13,16 +13,18 @@ public class Book {
     private String writer;
     private String publisher;
     private int year;
+    private String genre;
     private int cpage; //current page
     private int npages; //number of pages
     private int nsaves;
     private String[] was_happening;
 
-    public Book(String title,String writer,String publisher,int year,int cpage,int npages,int nsaves,String[] was_happening) {
+    public Book(String title,String writer,String publisher,int year,String genre,int cpage,int npages,int nsaves,String[] was_happening) {
         this.title = title;
         this.writer = writer;
         this.publisher = publisher;
         this.year = year;
+        this.genre = genre;
         this.cpage = cpage;
         this.npages = npages;
         this.nsaves = nsaves;
@@ -43,6 +45,10 @@ public class Book {
 
     public int getYear() {
         return year;
+    }
+
+    public String getGenre() {
+        return genre;
     }
 
     public int getCpage() {
@@ -75,6 +81,10 @@ public class Book {
 
     public void setYear(int year) {
         this.year = year;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 
     public void setCpage(int cpage) {

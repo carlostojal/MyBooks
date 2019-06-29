@@ -80,6 +80,7 @@ public class Books extends Fragment {
                 intent.putExtra("Writer",selectedBook.getWriter());
                 intent.putExtra("Publisher",selectedBook.getPublisher());
                 intent.putExtra("Year",selectedBook.getYear());
+                intent.putExtra("Genre",selectedBook.getGenre());
                 intent.putExtra("Cpage",selectedBook.getCpage());
                 intent.putExtra("Npages",selectedBook.getNpages());
                 intent.putExtra("Nsaves",selectedBook.getNsaves());
@@ -104,14 +105,14 @@ public class Books extends Fragment {
             Book book;
             while((line = br.readLine()) != null) {
                 String[] splitStr=line.split("; ");
-                int nsaves = Integer.parseInt(splitStr[6]);
+                int nsaves = Integer.parseInt(splitStr[7]);
                 //Toast.makeText(getContext(),splitStr[6],Toast.LENGTH_SHORT).show();
                 String[] wasHappening = new String[nsaves];
                 for(int i=0;i<nsaves;i++) {
-                    wasHappening[i] = splitStr[i+7];
+                    wasHappening[i] = splitStr[i+8];
                 }
-                if(splitStr.length==7+nsaves) {
-                    book = new Book(splitStr[0],splitStr[1],splitStr[2],Integer.parseInt(splitStr[3]),Integer.parseInt(splitStr[4]),Integer.parseInt(splitStr[5]),nsaves,wasHappening);
+                if(splitStr.length==8+nsaves) {
+                    book = new Book(splitStr[0],splitStr[1],splitStr[2],Integer.parseInt(splitStr[3]),splitStr[4],Integer.parseInt(splitStr[5]),Integer.parseInt(splitStr[6]),nsaves,wasHappening);
                     books.add(book);
                 }
                 filecontent.append(line);
