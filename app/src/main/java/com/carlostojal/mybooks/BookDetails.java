@@ -87,6 +87,7 @@ public class BookDetails extends AppCompatActivity {
 
         //if the page introduced as current is not a bigger value than total number of pages
         if(newBook.getCpage()<=old.getNpages()&&!happened.getText().toString().equals("")) {
+            Toast.makeText(getApplicationContext(), "Please wait...", Toast.LENGTH_SHORT).show();
             newBook.setNsaves(old.getNsaves()+1);
             String[] wasHappening = new String[newBook.getNsaves()];
             for(int i=0;i<newBook.getNsaves()-1;i++) {
