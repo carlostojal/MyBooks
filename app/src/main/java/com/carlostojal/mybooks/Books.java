@@ -98,6 +98,7 @@ public class Books extends Fragment {
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
             String line;
+            StringBuilder filecontent = new StringBuilder();
 
             //Toast.makeText(getContext(),"Loading books. Please wait...",Toast.LENGTH_SHORT).show();
             Book book;
@@ -113,8 +114,11 @@ public class Books extends Fragment {
                     book = new Book(splitStr[0],splitStr[1],splitStr[2],Integer.parseInt(splitStr[3]),Integer.parseInt(splitStr[4]),Integer.parseInt(splitStr[5]),nsaves,wasHappening);
                     books.add(book);
                 }
+                filecontent.append(line);
+                filecontent.append("\n");
             }
             br.close();
+            //Toast.makeText(getContext(),filecontent,Toast.LENGTH_SHORT).show();
             //Toast.makeText(getContext(),"Loaded books.",Toast.LENGTH_SHORT).show();
         } catch (FileNotFoundException e) {
             e.printStackTrace();

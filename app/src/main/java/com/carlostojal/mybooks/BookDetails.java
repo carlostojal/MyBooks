@@ -80,13 +80,13 @@ public class BookDetails extends AppCompatActivity {
     }
 
     public void onSave(View view) {
-        Toast.makeText(getApplicationContext(),"Test",Toast.LENGTH_SHORT).show();
         newBook.setCpage(Integer.parseInt(cpage.getText().toString()));
         newBook.setNsaves(old.getNsaves()+1);
         String[] wasHappening = new String[newBook.getNsaves()];
         for(int i=0;i<newBook.getNsaves()-1;i++) {
             wasHappening[i] = old.getWas_happening()[i];
         }
+        //Toast.makeText(getApplicationContext(),"Test",Toast.LENGTH_SHORT).show();
         //Toast.makeText(getApplicationContext(),String.valueOf(newBook.getNsaves()-1),Toast.LENGTH_SHORT).show();
         wasHappening[newBook.getNsaves()-1] = happened.getText().toString()+" (page "+newBook.getCpage()+")";
         newBook.setWas_happening(wasHappening);
@@ -143,7 +143,7 @@ public class BookDetails extends AppCompatActivity {
                         outputStreamWriter.write("; ");
                         outputStreamWriter.write(String.valueOf(books.get(i).getNpages()));
                         outputStreamWriter.write("; ");
-                        outputStreamWriter.write(String.valueOf(newBook.getNsaves()));
+                        outputStreamWriter.write(String.valueOf(books.get(i).getNsaves()));
                         for(int j = 0; j < books.get(i).getNsaves(); j++) {
                             outputStreamWriter.write("; ");
                             outputStreamWriter.write(books.get(i).getWas_happening()[j]);
