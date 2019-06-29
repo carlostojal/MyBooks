@@ -67,7 +67,12 @@ public class BookDetails extends AppCompatActivity {
         title.setText(old.getTitle());
         writer.setText(old.getWriter());
         publisher.setText(old.getPublisher());
-        year.setText(String.valueOf(old.getYear()));
+        if(old.getYear()==0) {
+            year.setText("No information provided.");
+        }
+        else {
+            year.setText(String.valueOf(old.getYear()));
+        }
         npages.setText(String.valueOf(old.getNpages()));
         StringBuilder wasHappening = new StringBuilder();
         for(int i=0;i<old.getNsaves();i++) {

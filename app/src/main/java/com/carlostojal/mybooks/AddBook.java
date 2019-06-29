@@ -80,7 +80,12 @@ public class AddBook extends Fragment {
                 outputStreamWriter.write("; ");
                 outputStreamWriter.write(writer); //writer
                 outputStreamWriter.write("; ");
-                outputStreamWriter.write(publisher); //publisher
+                if(publisher.equals("")) {
+                    outputStreamWriter.write("No information provided.");
+                }
+                else {
+                    outputStreamWriter.write(publisher); //publisher
+                }
                 outputStreamWriter.write("; ");
                 outputStreamWriter.write(String.valueOf(year)); //year
                 outputStreamWriter.write("; ");
