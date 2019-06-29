@@ -113,6 +113,7 @@ public class AddBook extends Fragment {
                 writerField.setText("");
                 publisherField.setText("");
                 yearField.setText("");
+                genreField.setText("");
                 npagesField.setText("");
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
