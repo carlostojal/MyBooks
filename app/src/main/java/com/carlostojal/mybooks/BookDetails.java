@@ -81,21 +81,21 @@ public class BookDetails extends AppCompatActivity {
 
     public void onSave(View view) {
         newBook.setCpage(Integer.parseInt(cpage.getText().toString()));
-        newBook.setNsaves(old.getNsaves()+1);
-        String[] wasHappening = new String[newBook.getNsaves()];
-        for(int i=0;i<newBook.getNsaves()-1;i++) {
-            wasHappening[i] = old.getWas_happening()[i];
-        }
-        //Toast.makeText(getApplicationContext(),"Test",Toast.LENGTH_SHORT).show();
-        //Toast.makeText(getApplicationContext(),String.valueOf(newBook.getNsaves()-1),Toast.LENGTH_SHORT).show();
-        wasHappening[newBook.getNsaves()-1] = happened.getText().toString()+" (page "+newBook.getCpage()+")";
-        newBook.setWas_happening(wasHappening);
 
         ArrayList<Book> books = loadBooks();
         //Toast.makeText(getApplicationContext(),String.valueOf(books.size()),Toast.LENGTH_SHORT).show();
 
         //if the page introduced as current is not a bigger value than total number of pages
-        if(newBook.getCpage()<=old.getNpages()) {
+        if(newBook.getCpage()<=old.getNpages()&&!happened.getText().toString().equals("")) {
+            newBook.setNsaves(old.getNsaves()+1);
+            String[] wasHappening = new String[newBook.getNsaves()];
+            for(int i=0;i<newBook.getNsaves()-1;i++) {
+                wasHappening[i] = old.getWas_happening()[i];
+            }
+            //Toast.makeText(getApplicationContext(),"Test",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(),String.valueOf(newBook.getNsaves()-1),Toast.LENGTH_SHORT).show();
+            wasHappening[newBook.getNsaves()-1] = happened.getText().toString()+" (page "+newBook.getCpage()+")";
+            newBook.setWas_happening(wasHappening);
 
             //cleans previous file content
             File file = new File(getApplicationContext().getFilesDir(), "books.csv");
@@ -163,7 +163,7 @@ public class BookDetails extends AppCompatActivity {
             }
         }
         else
-            Toast.makeText(getApplicationContext(), "Current page can't be a bigger value than the total number of pages.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Current page can't be a bigger value than the total number of pages and you have to describe what happened now.", Toast.LENGTH_LONG).show();
     }
 
     private ArrayList<Book> loadBooks() {
