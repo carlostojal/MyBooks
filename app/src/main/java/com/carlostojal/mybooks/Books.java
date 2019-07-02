@@ -41,6 +41,9 @@ public class Books extends Fragment {
        isStarted = true;
        if(isVisible&&isStarted) {
            books = loadBooks();
+           if(books.size()==0) {
+               Toast.makeText(getContext(),"No books were found.",Toast.LENGTH_SHORT).show();
+           }
            ArrayAdapter bookAdapter = new BookAdapter(getContext(),books);
            bookList.setAdapter(bookAdapter);
        }
@@ -52,6 +55,9 @@ public class Books extends Fragment {
         isVisible = isVisibleToUser;
         if(isStarted&&isVisible) {
             books = loadBooks();
+            if(books.size()==0) {
+                Toast.makeText(getContext(),"No books were found.",Toast.LENGTH_SHORT).show();
+            }
             ArrayAdapter bookAdapter = new BookAdapter(getContext(),books);
             bookList.setAdapter(bookAdapter);
         }
@@ -65,6 +71,9 @@ public class Books extends Fragment {
         //Toast.makeText(getContext(),"Test",Toast.LENGTH_SHORT).show();
 
         books = loadBooks();
+        if(books.size()==0) {
+            Toast.makeText(getContext(),"No books were found.",Toast.LENGTH_SHORT).show();
+        }
         bookList = view.findViewById(R.id.booklist);
         ArrayAdapter bookAdapter = new BookAdapter(getContext(),books);
         bookList.setAdapter(bookAdapter);
@@ -100,7 +109,6 @@ public class Books extends Fragment {
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
             String line;
-            StringBuilder filecontent = new StringBuilder();
 
             //Toast.makeText(getContext(),"Loading books. Please wait...",Toast.LENGTH_SHORT).show();
             Book book;
@@ -116,11 +124,8 @@ public class Books extends Fragment {
                     book = new Book(splitStr[0],splitStr[1],splitStr[2],splitStr[3],Integer.parseInt(splitStr[4]),splitStr[5],Integer.parseInt(splitStr[6]),Integer.parseInt(splitStr[7]),nsaves,wasHappening);
                     books.add(book);
                 }
-                filecontent.append(line);
-                filecontent.append("\n");
             }
             br.close();
-            //Toast.makeText(getContext(),filecontent,Toast.LENGTH_SHORT).show();
             //Toast.makeText(getContext(),"Loaded books.",Toast.LENGTH_SHORT).show();
         } catch (FileNotFoundException e) {
             e.printStackTrace();

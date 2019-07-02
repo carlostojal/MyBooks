@@ -123,10 +123,10 @@ public class AddBook extends Fragment {
                 npagesField.setText("");
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
-                Toast.makeText(getActivity(),"Error.",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),"Error. Please try again.",Toast.LENGTH_SHORT).show();
             } catch (IOException e) {
                 e.printStackTrace();
-                Toast.makeText(getActivity(),"Error.",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),"Error. Please try again.",Toast.LENGTH_SHORT).show();
             }
         }
         else

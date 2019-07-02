@@ -87,6 +87,71 @@ public class BookDetails extends AppCompatActivity {
         cpage.setText(String.valueOf(old.getCpage()));
     }
 
+    public void onRemove(View view) {
+        Bundle extras = getIntent().getExtras();
+        Book toRemove = new Book(extras.getString("ISBN"),extras.getString("Title"),extras.getString("Writer"),extras.getString("Publisher"),extras.getInt("Year"),extras.getString("Genre"),extras.getInt("Cpage"),extras.getInt("Npages"),extras.getInt("Nsaves"),extras.getStringArray("Was_happening"));
+
+        ArrayList<Book> books = loadBooks();
+
+        //cleans previous file content
+        File file = new File(getApplicationContext().getFilesDir(), "books.csv");
+        try {
+            PrintWriter printWriter = new PrintWriter(file);
+            printWriter.print("");
+            printWriter.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        OutputStreamWriter outputStreamWriter = null;
+        try {
+            outputStreamWriter = new OutputStreamWriter(getApplicationContext().openFileOutput("books.csv", Context.MODE_APPEND));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+        for(int i=0;i<books.size();i++) {
+            if(!books.get(i).getIsbn().equals(toRemove.getIsbn())) {
+                try {
+                    outputStreamWriter.write(books.get(i).getIsbn());
+                    outputStreamWriter.write("; ");
+                    outputStreamWriter.write(books.get(i).getTitle());
+                    outputStreamWriter.write("; ");
+                    outputStreamWriter.write(books.get(i).getWriter());
+                    outputStreamWriter.write("; ");
+                    outputStreamWriter.write(books.get(i).getPublisher());
+                    outputStreamWriter.write("; ");
+                    outputStreamWriter.write(String.valueOf(books.get(i).getYear()));
+                    outputStreamWriter.write("; ");
+                    outputStreamWriter.write(books.get(i).getGenre());
+                    outputStreamWriter.write("; ");
+                    outputStreamWriter.write(String.valueOf(books.get(i).getCpage()));
+                    outputStreamWriter.write("; ");
+                    outputStreamWriter.write(String.valueOf(books.get(i).getNpages()));
+                    outputStreamWriter.write("; ");
+                    outputStreamWriter.write(String.valueOf(books.get(i).getNsaves()));
+                    for(int j=0;j<books.get(i).getNsaves();j++) {
+                        outputStreamWriter.write("; ");
+                        outputStreamWriter.write(books.get(i).getWas_happening()[j]);
+                    }
+                    outputStreamWriter.write("\n");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Error. Please try again.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+        try {
+            outputStreamWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), "Error. Please try again.", Toast.LENGTH_SHORT).show();
+        }
+        //Toast.makeText(getApplicationContext(), "Book removed successfully.", Toast.LENGTH_SHORT).show();
+        finish();
+    }
+
     public void onSave(View view) {
         newBook.setCpage(Integer.parseInt(cpage.getText().toString()));
 

@@ -99,6 +99,26 @@
             app:layout_constraintTop_toBottomOf="@+id/year_details" />
 
         <TextView
+            android:id="@+id/genre_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/genre1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/npages_value_details" />
+
+        <TextView
+            android:id="@+id/genre_value_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Fantasy"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/genre_details" />
+
+        <TextView
             android:id="@+id/npages_details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -194,11 +214,25 @@
             app:layout_constraintTop_toBottomOf="@+id/happened_details" />
 
         <Button
+            android:id="@+id/remove"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:onClick="onRemove"
+            android:text="@string/remove"
+            android:textColor="@color/colorAccent"
+            android:background="@color/red"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/happened_value_details" />
+
+        <Button
             android:id="@+id/save"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="16dp"
             android:background="@color/colorPrimary"
             android:onClick="onSave"
@@ -207,27 +241,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/happened_value_details" />
-
-        <TextView
-            android:id="@+id/genre_details"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:text="@string/genre1"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/npages_value_details" />
-
-        <TextView
-            android:id="@+id/genre_value_details"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="Fantasy"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/genre_details" />
+            app:layout_constraintTop_toBottomOf="@+id/remove" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
