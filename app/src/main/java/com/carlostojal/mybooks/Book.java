@@ -9,6 +9,7 @@ package com.carlostojal.mybooks;
 
 public class Book {
 
+    private String isbn;
     private String title;
     private String writer;
     private String publisher;
@@ -19,7 +20,8 @@ public class Book {
     private int nsaves;
     private String[] was_happening;
 
-    public Book(String title,String writer,String publisher,int year,String genre,int cpage,int npages,int nsaves,String[] was_happening) {
+    public Book(String isbn,String title,String writer,String publisher,int year,String genre,int cpage,int npages,int nsaves,String[] was_happening) {
+        this.isbn = isbn;
         this.title = title;
         this.writer = writer;
         this.publisher = publisher;
@@ -29,6 +31,10 @@ public class Book {
         this.npages = npages;
         this.nsaves = nsaves;
         this.was_happening = was_happening;
+    }
+
+    public String getIsbn() {
+        return isbn;
     }
 
     public String getTitle() {
@@ -65,6 +71,10 @@ public class Book {
 
     public String[] getWas_happening() {
         return was_happening;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
     public void setTitle(String title) {

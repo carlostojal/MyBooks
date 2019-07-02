@@ -76,6 +76,7 @@ public class Books extends Fragment {
                 Book selectedBook = (Book) adapterView.getItemAtPosition(i);
                 //open the book activity
                 Intent intent = new Intent(Books.this.getActivity(),BookDetails.class);
+                intent.putExtra("ISBN",selectedBook.getIsbn());
                 intent.putExtra("Title",selectedBook.getTitle());
                 intent.putExtra("Writer",selectedBook.getWriter());
                 intent.putExtra("Publisher",selectedBook.getPublisher());
@@ -105,14 +106,14 @@ public class Books extends Fragment {
             Book book;
             while((line = br.readLine()) != null) {
                 String[] splitStr=line.split("; ");
-                int nsaves = Integer.parseInt(splitStr[7]);
+                int nsaves = Integer.parseInt(splitStr[8]);
                 //Toast.makeText(getContext(),splitStr[6],Toast.LENGTH_SHORT).show();
                 String[] wasHappening = new String[nsaves];
                 for(int i=0;i<nsaves;i++) {
-                    wasHappening[i] = splitStr[i+8];
+                    wasHappening[i] = splitStr[i+9];
                 }
-                if(splitStr.length==8+nsaves) {
-                    book = new Book(splitStr[0],splitStr[1],splitStr[2],Integer.parseInt(splitStr[3]),splitStr[4],Integer.parseInt(splitStr[5]),Integer.parseInt(splitStr[6]),nsaves,wasHappening);
+                if(splitStr.length==9+nsaves) {
+                    book = new Book(splitStr[0],splitStr[1],splitStr[2],splitStr[3],Integer.parseInt(splitStr[4]),splitStr[5],Integer.parseInt(splitStr[6]),Integer.parseInt(splitStr[7]),nsaves,wasHappening);
                     books.add(book);
                 }
                 filecontent.append(line);

@@ -48,7 +48,7 @@ public class BookDetails extends AppCompatActivity {
 
         //gets intent extras to a Book object
         Bundle extras = getIntent().getExtras();
-        old = new Book(extras.getString("Title"),extras.getString("Writer"),extras.getString("Publisher"),extras.getInt("Year"),extras.getString("Genre"),extras.getInt("Cpage"),extras.getInt("Npages"),extras.getInt("Nsaves"),extras.getStringArray("Was_happening"));
+        old = new Book(extras.getString("ISBN"),extras.getString("Title"),extras.getString("Writer"),extras.getString("Publisher"),extras.getInt("Year"),extras.getString("Genre"),extras.getInt("Cpage"),extras.getInt("Npages"),extras.getInt("Nsaves"),extras.getStringArray("Was_happening"));
         newBook = old;
 
         //sets activity title to the title of the book
@@ -119,6 +119,8 @@ public class BookDetails extends AppCompatActivity {
             try {
                 OutputStreamWriter outputStreamWriter = new OutputStreamWriter(getApplicationContext().openFileOutput("books.csv", Context.MODE_APPEND));
                 //puts edited book on the top of the list
+                outputStreamWriter.write(newBook.getIsbn());
+                outputStreamWriter.write("; ");
                 outputStreamWriter.write(newBook.getTitle());
                 outputStreamWriter.write("; ");
                 outputStreamWriter.write(newBook.getWriter());
@@ -126,6 +128,8 @@ public class BookDetails extends AppCompatActivity {
                 outputStreamWriter.write(newBook.getPublisher());
                 outputStreamWriter.write("; ");
                 outputStreamWriter.write(String.valueOf(newBook.getYear()));
+                outputStreamWriter.write("; ");
+                outputStreamWriter.write(newBook.getGenre());
                 outputStreamWriter.write("; ");
                 outputStreamWriter.write(String.valueOf(newBook.getCpage()));
                 outputStreamWriter.write("; ");
@@ -139,7 +143,9 @@ public class BookDetails extends AppCompatActivity {
                 outputStreamWriter.write("\n");
                 //writes each book in the list, if it isn't the edited
                 for (int i = 0; i < books.size(); i++) {
-                    if (!books.get(i).getTitle().equals(old.getTitle()) || !books.get(i).getWriter().equals(old.getWriter())) {
+                    if (!books.get(i).getIsbn().equals(old.getIsbn())) {
+                        outputStreamWriter.write(books.get(i).getIsbn());
+                        outputStreamWriter.write("; ");
                         outputStreamWriter.write(books.get(i).getTitle());
                         outputStreamWriter.write("; ");
                         outputStreamWriter.write(books.get(i).getWriter());
@@ -147,6 +153,8 @@ public class BookDetails extends AppCompatActivity {
                         outputStreamWriter.write(books.get(i).getPublisher());
                         outputStreamWriter.write("; ");
                         outputStreamWriter.write(String.valueOf(books.get(i).getYear()));
+                        outputStreamWriter.write("; ");
+                        outputStreamWriter.write(books.get(i).getGenre());
                         outputStreamWriter.write("; ");
                         outputStreamWriter.write(String.valueOf(books.get(i).getCpage()));
                         outputStreamWriter.write("; ");
@@ -185,14 +193,14 @@ public class BookDetails extends AppCompatActivity {
             Book book;
             while((line = br.readLine()) != null) {
                 String[] splitStr=line.split("; ");
-                int nsaves = Integer.parseInt(splitStr[6]);
+                int nsaves = Integer.parseInt(splitStr[8]);
                 //Toast.makeText(getContext(),splitStr[6],Toast.LENGTH_SHORT).show();
                 String[] wasHappening = new String[nsaves];
                 for(int i=0;i<nsaves;i++) {
-                    wasHappening[i] = splitStr[i+7];
+                    wasHappening[i] = splitStr[i+9];
                 }
-                if(splitStr.length==8+nsaves) {
-                    book = new Book(splitStr[0],splitStr[1],splitStr[2],Integer.parseInt(splitStr[3]),splitStr[4],Integer.parseInt(splitStr[5]),Integer.parseInt(splitStr[6]),nsaves,wasHappening);
+                if(splitStr.length==9+nsaves) {
+                    book = new Book(splitStr[0],splitStr[1],splitStr[2],splitStr[3],Integer.parseInt(splitStr[4]),splitStr[5],Integer.parseInt(splitStr[6]),Integer.parseInt(splitStr[7]),nsaves,wasHappening);
                     books.add(book);
                 }
             }

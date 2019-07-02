@@ -3,10 +3,11 @@
     <string name="tab_books">Books</string>
     <string name="tab_add_book">Add Book</string>
     <string name="tab_about">About</string>
+    <string name="isbn">"ISBN:</string>
     <string name="title">Title:</string>
     <string name="writer">Writer:</string>
     <string name="publisher">Publisher (optional):</string>
-    <string name="publisher1">Publisher: </string>
+    <string name="publisher1">Publisher:</string>
     <string name="year">Year (optional):</string>
     <string name="year1">Year: </string>
     <string name="genre">Genre (optional):</string>

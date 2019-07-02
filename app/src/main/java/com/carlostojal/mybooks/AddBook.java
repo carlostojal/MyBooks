@@ -27,6 +27,7 @@ public class AddBook extends Fragment {
     public static final String TAG = "AddBookFragment";
 
     //Interface elements declaration
+    private EditText isbnField;
     private EditText titleField;
     private EditText writerField;
     private EditText publisherField;
@@ -40,6 +41,7 @@ public class AddBook extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_book,container,false);
 
+        isbnField = (EditText) view.findViewById(R.id.isbn_field);
         titleField = (EditText) view.findViewById(R.id.title_field);
         writerField = (EditText) view.findViewById(R.id.writer_field);
         publisherField = (EditText) view.findViewById(R.id.publisher_field);
@@ -59,6 +61,7 @@ public class AddBook extends Fragment {
     }
 
     public void onAddBook(Context context) {
+        String isbn = isbnField.getText().toString(); //obligatory
         String title = titleField.getText().toString(); //obligatory
         String writer = writerField.getText().toString() ; //obligatory
         String publisher = publisherField.getText().toString();
@@ -83,6 +86,8 @@ public class AddBook extends Fragment {
             try {
                 Toast.makeText(getActivity(),"Please wait...",Toast.LENGTH_SHORT).show();
                 OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("books.csv",Context.MODE_APPEND));
+                outputStreamWriter.write(isbn);
+                outputStreamWriter.write("; ");
                 outputStreamWriter.write(title); //title
                 outputStreamWriter.write("; ");
                 outputStreamWriter.write(writer); //writer
@@ -109,6 +114,7 @@ public class AddBook extends Fragment {
                 outputStreamWriter.close();
                 Toast.makeText(getActivity(),"Book added successfully.",Toast.LENGTH_SHORT).show();
                 //cleans all input fields
+                isbnField.setText("");
                 titleField.setText("");
                 writerField.setText("");
                 publisherField.setText("");
