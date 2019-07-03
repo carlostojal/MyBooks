@@ -19,7 +19,7 @@
     <string name="save">Save</string>
     <string name="remove">Remove Book</string>
     <string name="add_book">Add Book</string>
-    <string name="version">Version 3.5</string>
+    <string name="version">Version 3.6</string>
     <string name="version_date">Built on 03/07/2019</string>
     <string name="developer">Developed by Carlos Tojal (carlostojal)</string>
     <string name="repo">github.com/carlostojal/MyBooks</string>
