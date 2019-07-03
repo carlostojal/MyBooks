@@ -40,19 +40,22 @@ public class BookDetails extends AppCompatActivity {
 
     Book old;
     Book newBook;
+    BookManager bookManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_details);
 
+        bookManager = new BookManager();
+
         //gets intent extras to a Book object
         Bundle extras = getIntent().getExtras();
-        old = new Book(extras.getString("ISBN"),extras.getString("Title"),extras.getString("Writer"),extras.getString("Publisher"),extras.getInt("Year"),extras.getString("Genre"),extras.getInt("Cpage"),extras.getInt("Npages"),extras.getInt("Nsaves"),extras.getStringArray("Was_happening"));
+        old = new Book(extras.getString("ISBN"), extras.getString("Title"), extras.getString("Writer"), extras.getString("Publisher"), extras.getInt("Year"), extras.getString("Genre"), extras.getInt("Cpage"), extras.getInt("Npages"), extras.getInt("Nsaves"), extras.getStringArray("Was_happening"));
         newBook = old;
 
         //sets activity title to the title of the book
-        setTitle(old.getTitle()+" - Details");
+        setTitle(old.getTitle() + " - Details");
 
         //sets fields data
         title = (TextView) findViewById(R.id.title_value_details);
@@ -70,15 +73,14 @@ public class BookDetails extends AppCompatActivity {
         writer.setText(old.getWriter());
         publisher.setText(old.getPublisher());
         genre.setText(old.getGenre());
-        if(old.getYear()==0) {
+        if (old.getYear() == 0) {
             year.setText("No information provided.");
-        }
-        else {
+        } else {
             year.setText(String.valueOf(old.getYear()));
         }
         npages.setText(String.valueOf(old.getNpages()));
         StringBuilder wasHappening = new StringBuilder();
-        for(int i=0;i<old.getNsaves();i++) {
+        for (int i = 0; i < old.getNsaves(); i++) {
             wasHappening.append("• ");
             wasHappening.append(old.getWas_happening()[i]);
             wasHappening.append("\n");
@@ -89,9 +91,9 @@ public class BookDetails extends AppCompatActivity {
 
     public void onRemove(View view) {
         Bundle extras = getIntent().getExtras();
-        Book toRemove = new Book(extras.getString("ISBN"),extras.getString("Title"),extras.getString("Writer"),extras.getString("Publisher"),extras.getInt("Year"),extras.getString("Genre"),extras.getInt("Cpage"),extras.getInt("Npages"),extras.getInt("Nsaves"),extras.getStringArray("Was_happening"));
+        Book toRemove = new Book(extras.getString("ISBN"), extras.getString("Title"), extras.getString("Writer"), extras.getString("Publisher"), extras.getInt("Year"), extras.getString("Genre"), extras.getInt("Cpage"), extras.getInt("Npages"), extras.getInt("Nsaves"), extras.getStringArray("Was_happening"));
 
-        ArrayList<Book> books = loadBooks();
+        ArrayList<Book> books = bookManager.loadBooks(getApplicationContext());
 
         //cleans previous file content
         File file = new File(getApplicationContext().getFilesDir(), "books.csv");
@@ -111,8 +113,8 @@ public class BookDetails extends AppCompatActivity {
         }
 
 
-        for(int i=0;i<books.size();i++) {
-            if(!books.get(i).getIsbn().equals(toRemove.getIsbn())) {
+        for (int i = 0; i < books.size(); i++) {
+            if (!books.get(i).getIsbn().equals(toRemove.getIsbn())) {
                 try {
                     outputStreamWriter.write(books.get(i).getIsbn());
                     outputStreamWriter.write("; ");
@@ -131,7 +133,7 @@ public class BookDetails extends AppCompatActivity {
                     outputStreamWriter.write(String.valueOf(books.get(i).getNpages()));
                     outputStreamWriter.write("; ");
                     outputStreamWriter.write(String.valueOf(books.get(i).getNsaves()));
-                    for(int j=0;j<books.get(i).getNsaves();j++) {
+                    for (int j = 0; j < books.get(i).getNsaves(); j++) {
                         outputStreamWriter.write("; ");
                         outputStreamWriter.write(books.get(i).getWas_happening()[j]);
                     }
@@ -155,20 +157,20 @@ public class BookDetails extends AppCompatActivity {
     public void onSave(View view) {
         newBook.setCpage(Integer.parseInt(cpage.getText().toString()));
 
-        ArrayList<Book> books = loadBooks();
+        ArrayList<Book> books = bookManager.loadBooks(getApplicationContext());
         //Toast.makeText(getApplicationContext(),String.valueOf(books.size()),Toast.LENGTH_SHORT).show();
 
         //if the page introduced as current is not a bigger value than total number of pages
-        if(newBook.getCpage()<=old.getNpages()&&!happened.getText().toString().equals("")) {
+        if (newBook.getCpage() <= old.getNpages() && !happened.getText().toString().equals("")) {
             Toast.makeText(getApplicationContext(), "Please wait...", Toast.LENGTH_SHORT).show();
-            newBook.setNsaves(old.getNsaves()+1);
+            newBook.setNsaves(old.getNsaves() + 1);
             String[] wasHappening = new String[newBook.getNsaves()];
-            for(int i=0;i<newBook.getNsaves()-1;i++) {
+            for (int i = 0; i < newBook.getNsaves() - 1; i++) {
                 wasHappening[i] = old.getWas_happening()[i];
             }
             //Toast.makeText(getApplicationContext(),"Test",Toast.LENGTH_SHORT).show();
             //Toast.makeText(getApplicationContext(),String.valueOf(newBook.getNsaves()-1),Toast.LENGTH_SHORT).show();
-            wasHappening[newBook.getNsaves()-1] = happened.getText().toString()+" (page "+newBook.getCpage()+")";
+            wasHappening[newBook.getNsaves() - 1] = happened.getText().toString() + " (page " + newBook.getCpage() + ")";
             newBook.setWas_happening(wasHappening);
 
             //cleans previous file content
@@ -201,7 +203,7 @@ public class BookDetails extends AppCompatActivity {
                 outputStreamWriter.write(String.valueOf(newBook.getNpages()));
                 outputStreamWriter.write("; ");
                 outputStreamWriter.write(String.valueOf(newBook.getNsaves()));
-                for(int i = 0; i < newBook.getNsaves(); i++) {
+                for (int i = 0; i < newBook.getNsaves(); i++) {
                     outputStreamWriter.write("; ");
                     outputStreamWriter.write(newBook.getWas_happening()[i]);
                 }
@@ -226,7 +228,7 @@ public class BookDetails extends AppCompatActivity {
                         outputStreamWriter.write(String.valueOf(books.get(i).getNpages()));
                         outputStreamWriter.write("; ");
                         outputStreamWriter.write(String.valueOf(books.get(i).getNsaves()));
-                        for(int j = 0; j < books.get(i).getNsaves(); j++) {
+                        for (int j = 0; j < books.get(i).getNsaves(); j++) {
                             outputStreamWriter.write("; ");
                             outputStreamWriter.write(books.get(i).getWas_happening()[j]);
                         }
@@ -243,42 +245,7 @@ public class BookDetails extends AppCompatActivity {
                 e.printStackTrace();
                 Toast.makeText(getApplicationContext(), "Error.", Toast.LENGTH_SHORT).show();
             }
-        }
-        else
+        } else
             Toast.makeText(getApplicationContext(), "Current page can't be a bigger value than the total number of pages and you have to describe what happened now.", Toast.LENGTH_LONG).show();
-    }
-
-    private ArrayList<Book> loadBooks() {
-        ArrayList<Book> books = new ArrayList<Book>();
-        File file = new File(getApplicationContext().getFilesDir(),"books.csv");
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(file));
-            String line;
-
-            Book book;
-            while((line = br.readLine()) != null) {
-                String[] splitStr=line.split("; ");
-                int nsaves = Integer.parseInt(splitStr[8]);
-                //Toast.makeText(getContext(),splitStr[6],Toast.LENGTH_SHORT).show();
-                String[] wasHappening = new String[nsaves];
-                for(int i=0;i<nsaves;i++) {
-                    wasHappening[i] = splitStr[i+9];
-                }
-                if(splitStr.length==9+nsaves) {
-                    book = new Book(splitStr[0],splitStr[1],splitStr[2],splitStr[3],Integer.parseInt(splitStr[4]),splitStr[5],Integer.parseInt(splitStr[6]),Integer.parseInt(splitStr[7]),nsaves,wasHappening);
-                    books.add(book);
-                }
-            }
-            //Toast.makeText(getApplicationContext(),String.valueOf(nlines),Toast.LENGTH_SHORT).show();
-            br.close();
-            //Toast.makeText(getApplicationContext(),stringBuilder,Toast.LENGTH_SHORT).show();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-            Toast.makeText(getApplicationContext(),"Error.",Toast.LENGTH_SHORT).show();
-        }
-
-        return books;
     }
 }
