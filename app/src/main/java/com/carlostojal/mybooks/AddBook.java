@@ -26,6 +26,8 @@ import java.io.OutputStreamWriter;
 public class AddBook extends Fragment {
     public static final String TAG = "AddBookFragment";
 
+    BookManager bookManager;
+
     //Interface elements declaration
     private EditText isbnField;
     private EditText titleField;
@@ -40,6 +42,8 @@ public class AddBook extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_book,container,false);
+
+        bookManager = new BookManager();
 
         isbnField = (EditText) view.findViewById(R.id.isbn_field);
         titleField = (EditText) view.findViewById(R.id.title_field);
@@ -82,38 +86,14 @@ public class AddBook extends Fragment {
         else
             npages = Integer.parseInt(npagesField.getText().toString()); //obligatory
 
+        String[] wasHappening = new String[1];
+        wasHappening[0] = "Book add.";
+
+        Book newBook = new Book(isbn,title,writer,publisher,year,genre,0,npages,1,wasHappening);
+
+        //if no field was left empty
         if(!title.equals("")&&!writer.equals("")&&npages>0) {
-            try {
-                Toast.makeText(getActivity(),"Please wait...",Toast.LENGTH_SHORT).show();
-                OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("books.csv",Context.MODE_APPEND));
-                outputStreamWriter.write(isbn);
-                outputStreamWriter.write("; ");
-                outputStreamWriter.write(title); //title
-                outputStreamWriter.write("; ");
-                outputStreamWriter.write(writer); //writer
-                outputStreamWriter.write("; ");
-                if(publisher.equals("")) {
-                    outputStreamWriter.write("No information provided.");
-                }
-                else {
-                    outputStreamWriter.write(publisher); //publisher
-                }
-                outputStreamWriter.write("; ");
-                outputStreamWriter.write(String.valueOf(year)); //year
-                outputStreamWriter.write("; ");
-                outputStreamWriter.write(genre); //genre
-                outputStreamWriter.write("; ");
-                outputStreamWriter.write(String.valueOf(0)); //current page
-                outputStreamWriter.write("; ");
-                outputStreamWriter.write(String.valueOf(npages)); //number of pages
-                outputStreamWriter.write("; ");
-                outputStreamWriter.write(String.valueOf(1)); //number of saves
-                outputStreamWriter.write("; ");
-                outputStreamWriter.write("Book add."); //what was happening
-                outputStreamWriter.write("\n");
-                outputStreamWriter.close();
-                Toast.makeText(getActivity(),"Book added successfully.",Toast.LENGTH_SHORT).show();
-                //cleans all input fields
+            if(bookManager.addBook(getContext(),newBook)) { //if adding was successful
                 isbnField.setText("");
                 titleField.setText("");
                 writerField.setText("");
@@ -121,15 +101,13 @@ public class AddBook extends Fragment {
                 yearField.setText("");
                 genreField.setText("");
                 npagesField.setText("");
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-                Toast.makeText(getActivity(),"Error. Please try again.",Toast.LENGTH_SHORT).show();
-            } catch (IOException e) {
-                e.printStackTrace();
-                Toast.makeText(getActivity(),"Error. Please try again.",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),"Book added successfully.",Toast.LENGTH_SHORT).show();
+            }
+            else {
+                Toast.makeText(getActivity(),"Error.",Toast.LENGTH_SHORT).show();
             }
         }
         else
-            Toast.makeText(getActivity(),"Obligatory fields can't be left empty and number of pages cant't be negative.",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(),"Obligatory fields can't be left empty and number of pages can't be negative.",Toast.LENGTH_SHORT).show();
     }
 }
