@@ -2,7 +2,7 @@
 
 ![MyBooks Logo](https://raw.githubusercontent.com/carlostojal/MyBooks/master/app/src/main/res/mipmap-hdpi/mybooks_logo.png)
 
-Do you like to read? Are you always forgetting what page of the book you were in and what was happening? So this application is for you.
+Do you like to read? Are you always forgetting what page of the book you were in and what was happening? So this app is for you.
 
 * ## Books Tab
 ![Books Tab](https://raw.githubusercontent.com/carlostojal/MyBooks/master/screenshots/Screenshot_2019-06-29-15-33-28-175_com.carlostojal.mybooks.png)
