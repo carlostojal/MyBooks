@@ -2,8 +2,7 @@
 
 ![MyBooks Logo](https://raw.githubusercontent.com/carlostojal/MyBooks/master/app/src/main/res/mipmap-hdpi/mybooks_logo.png)
 
-Android app oriented for those who like to read books.
-MyBooks lets you always keep track of where you were in the books you are reading and what was happening in that part.
+Do you like to read? Are you always forgetting what page of the book you were in and what was happening? So this application is for you.
 
 * ## Books Tab
 ![Books Tab](https://raw.githubusercontent.com/carlostojal/MyBooks/master/screenshots/Screenshot_2019-06-29-15-33-28-175_com.carlostojal.mybooks.png)
